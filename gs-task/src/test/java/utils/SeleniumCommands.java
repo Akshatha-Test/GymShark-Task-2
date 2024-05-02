@@ -46,11 +46,6 @@ public class SeleniumCommands {
   private <V> V until(Function<? super WebDriver, V> expectedCondition) {
     return defaultWait().until(expectedCondition);
   }
-  
-  /*public static String getTextFromElement(By selector) {
-	  
-	     return instance.getTextFromElement(selector);
-  }*/
 
   public  static SeleniumCommands getCommands() {
     return instance;
