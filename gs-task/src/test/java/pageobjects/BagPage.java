@@ -3,6 +3,7 @@ package pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import stepdefs.hooks.Hooks;
 import utils.SeleniumCommands;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class BagPage {
   private static final By EMPTY_BAG = By.xpath("//*[text() = 'Your bag is empty']");
   
   public BagPage() {
+	  getCommands().defaultWait();
     getCommands().waitForAndGetVisibleElementLocated(BAG_PAGE);
   }
 
@@ -37,10 +39,10 @@ public class BagPage {
     return extractVariantIDFromString(getCommands().getAttributeFromElement(bagItem, GS_LOCATOR_ATTRIBUTE));
   }
 
-  public BagPage selectRemoveIcon() {
+  /*public BagPage selectRemoveIcon() {
 	    getCommands().waitForAndClickOnElementLocated(REMOVE_ICON);
 	    return this;
-  }
+  }*/
   
   public BagPage emptyBag() {
 	    getCommands().waitForAndGetAllVisibleElementsLocated(EMPTY_BAG);
@@ -48,8 +50,11 @@ public class BagPage {
 	    return this;
   }
   
-  /*public BagPage emptyBag() {
-	    getCommands().waitForAndGetAllVisibleElementsLocated(EMPTY_BAG);
+  public BagPage selectRemove() throws Exception {
+		 Hooks hooks = new Hooks();
+		hooks.clickOnElement(REMOVE_ICON);
+	    //getCommands().waitForAndClickOnElementLocated(ADD_TO_BAG_BUTTON);
 	    return this;
-}*/
+	  }
+ 
 }

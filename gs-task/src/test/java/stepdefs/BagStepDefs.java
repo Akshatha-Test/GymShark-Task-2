@@ -1,6 +1,7 @@
 package stepdefs;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static utils.SeleniumCommands.getCommands;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import io.cucumber.java.en.When;
 import stepdefs.hooks.Hooks;
 import pageobjects.BagPage;
 import pageobjects.ProductDisplayPage;
+import static utils.SeleniumCommands.getCommands;
 
 public class BagStepDefs {
 	
@@ -27,13 +29,15 @@ public class BagStepDefs {
 	public void add_product_to_bag() {
 		driver.get("https://uk.gymshark.com/products/gymshark-speed-t-shirt-black-aw23");
 	    productId = 39654522814667L;
-	    new ProductDisplayPage().closeCookieBanner();
+	    //new ProductDisplayPage().closeCookieBanner();
 	 }
 
 	@Given("Product exists in the bag")
-	public void product_exists_in_the_bag() {
+	public void product_exists_in_the_bag() throws Exception {
 		ProductDisplayPage productDisplayPage = new ProductDisplayPage();
-	    productDisplayPage.selectSmallSize();
+	    productDisplayPage.selectSize();
+	    getCommands().defaultWait();
+	    //Thread.sleep(2000);
 	    productDisplayPage.selectAddToBag();
 	    
 	    BagPage bagPage = new BagPage();
@@ -42,9 +46,9 @@ public class BagStepDefs {
 	}
 
 	@When("I remove a product")
-	public void i_remove_a_product() {
+	public void i_remove_a_product() throws Exception {
 		BagPage bagPage = new BagPage();
-		bagPage.selectRemoveIcon();   
+		bagPage.selectRemove();   
 	}
 
 	@Then("bag is empty")
